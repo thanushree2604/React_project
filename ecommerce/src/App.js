@@ -1,25 +1,24 @@
 import React from 'react';
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Navbar } from './Navbar';
+import { Home } from './Home';
+import { About } from './About';
+import { Dashboard } from './Dashboard';
+import "./Components/Index.css";
 
 export const App = () => {
-    const [username, setUsername] = useState("");
-    const changeHandler = e => {
-        setUsername(e.target.value);
-    };
-    return (
-        <div>
-            <center>
-                <input
-                    type="text"
-                    placeholder="username"
-                    name="username"
-                    value={username}
-                    onChange={changeHandler}
-                />
-                <h3>{username}</h3>
-            </center>
-        </div>
-    );
+  return (
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default App;
