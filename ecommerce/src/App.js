@@ -1,24 +1,21 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navbar } from './Navbar';
-import { Home } from './Home';
-import { About } from './About';
-import { Dashboard } from './Dashboard';
-import "./Components/Index.css";
+import React, { createContext, useState } from 'react'
+import { Product2 } from './Product2'
+import { ProductList2 } from './ProductList2'
+import { Home2 } from './Home2'
 
-export const App = () => {
+export const myContext = createContext()
+const App = () => {
+
+  const result = useState("Passed")
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
+      <myContext.Provider value = {result}>
+      <Product2 />
+      <ProductList2  />
+      <Home2 />
+      </myContext.Provider>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
