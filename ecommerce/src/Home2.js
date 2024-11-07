@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { myContext } from './App'
+import { myContext } from './AppContext'
 export const Home2 = ({uname}) => {
     const r  = useContext(myContext)
   return (

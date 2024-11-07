@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { myContext } from './App'
+import { myContext } from './AppContext'
 
 export const Product2 = () => {
     const rst = useContext(myContext)

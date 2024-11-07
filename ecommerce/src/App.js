@@ -1,19 +1,55 @@
-import React, { createContext, useState } from 'react'
-import { Product2 } from './Product2'
-import { ProductList2 } from './ProductList2'
-import { Home2 } from './Home2'
-
-export const myContext = createContext()
+import React, { useState } from 'react'
+import axios from 'axios'
 const App = () => {
+    const [data,setData] = useState(
+        {
+            username: "",
+            email: "",
+            password: "",
+            repassword:""
+        }
+    )
+    const {username, email, password, repassword} = data
+    const changeHandler = e =>
+    {
+        setData({...data,[e.target.name]: e.target.value})
+    }
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        if (password !== repassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+        try {
+            const response = await axios.post("https://testsection-1-default-rtdb.firebaseio.com/users.json", data);
+            console.log('Data submitted successfully:', response.data);
+        } catch (error) {
+            console.error('Error submitting data:', error);
+        }
+    };
 
-  const result = useState("Passed")
+   //
+
   return (
     <div>
-      <myContext.Provider value = {result}>
-      <Product2 />
-      <ProductList2  />
-      <Home2 />
-      </myContext.Provider>
+        <center> 
+        <form onSubmit={submitHandler}>
+            <input type='text' placeholder='Enter username' name='username' value = {username} onChange={changeHandler}/>
+            <br />
+            <br />
+            <input type='email' placeholder='Enter email'  name='email' value = {email} onChange={changeHandler}/>
+            <br />
+            <br />
+            <input type='password' placeholder='Enter password'  name='password' value = {password} onChange={changeHandler}/>
+            <br />
+            <br />
+            <input type='password' placeholder='Retype password' name='repassword' value = {repassword} onChange={changeHandler} />
+            <br />
+            <br />
+            <input type='submit' name='submit' />
+            <br />
+        </form>
+        </center>
     </div>
   )
 }
